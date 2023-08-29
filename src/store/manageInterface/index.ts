@@ -22,10 +22,14 @@ export interface Contacts {
 }
 export interface User {
   id: string;
+  user: string;
   username: string;
   nickname: string;
   phone: string;
   email: string;
+  department: string;
+  company_abbr: string;
+  company_name: string;
   portrait: string;
   status: number;
   role: string;

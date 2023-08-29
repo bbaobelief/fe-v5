@@ -34,14 +34,15 @@ const AddUser: React.FC<TeamProps> = (props: TeamProps) => {
   const userColumn: ColumnsType<User> = [
     {
       title: t('用户名'),
-      dataIndex: 'username',
+      dataIndex: 'user',
       ellipsis: true,
+      render: (text: string, record) => record.user || '-',
     },
     {
-      title: t('显示名'),
-      dataIndex: 'nickname',
+      title: t('公司名'),
+      dataIndex: 'company_name',
       ellipsis: true,
-      render: (text: string, record) => record.nickname || '-',
+      render: (text: string, record) => record.company_name || '-',
     },
     {
       title: t('邮箱'),
