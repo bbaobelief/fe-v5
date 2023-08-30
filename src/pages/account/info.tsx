@@ -148,8 +148,14 @@ export default function Info() {
             >
               <Col span={4}>
                 <div>
-                  <label>{t('用户名')}：</label>
-                  <span>{profile.username}</span>
+                  <label>{t('用户')}：</label>
+                  <span>{profile.user}</span>
+                </div>
+              </Col>
+              <Col span={4}>
+                <div>
+                  <label>{t('公司')}：</label>
+                  <span>{profile.company_abbr}</span>
                 </div>
               </Col>
               <Col span={4}>

@@ -21,7 +21,9 @@ export interface accountStoreState {
     nickname: string;
     role: string;
     roles: string[];
+    user: string;
     username: string;
+    company_abbr: string;
     email: string;
     phone: string;
     id: number;
