@@ -125,21 +125,21 @@ const SideMenu: FC = () => {
         },
       ],
     },
-    {
-      key: 'job',
-      icon: <CodeOutlined />,
-      label: t('告警自愈'),
-      children: [
-        {
-          key: '/job-tpls',
-          label: t('自愈脚本'),
-        },
-        {
-          key: '/job-tasks',
-          label: t('执行历史'),
-        },
-      ],
-    },
+    // {
+    //   key: 'job',
+    //   icon: <CodeOutlined />,
+    //   label: t('告警自愈'),
+    //   children: [
+    //     {
+    //       key: '/job-tpls',
+    //       label: t('自愈脚本'),
+    //     },
+    //     {
+    //       key: '/job-tasks',
+    //       label: t('执行历史'),
+    //     },
+    //   ],
+    // },
     {
       key: 'manage',
       // icon: <UserOutlined />,

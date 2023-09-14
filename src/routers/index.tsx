@@ -22,6 +22,7 @@ import { RootState, accountStoreState } from '@/store/accountInterface';
 import NotFound from '@/pages/NotFound';
 import Page403 from '@/pages/NotFound/Page403';
 import Login from '@/pages/login';
+import LoginAdmin from '@/pages/loginAdmin';
 import Overview from '@/pages/login/overview';
 import LoginCallback from '@/pages/loginCallback';
 import LoginCallbackCAS from '@/pages/loginCallback/cas';
@@ -93,7 +94,7 @@ export default function Content() {
   let { profile } = useSelector<RootState, accountStoreState>((state) => state.account);
   const location = useLocation();
   const dispatch = useDispatch();
-  if (!profile.id && location.pathname != '/login' && !location.pathname.startsWith('/callback')) {
+  if (!profile.id && location.pathname != '/login' && location.pathname != '/loginAdmin' && !location.pathname.startsWith('/callback')) {
     if (!location.pathname.startsWith('/dashboards/share/')) {
       dispatch({ type: 'common/getClusters' });
     }
@@ -124,6 +125,7 @@ export default function Content() {
         <Route path='/demo' component={Demo} />
         <Route path='/overview' component={Overview} />
         <Route path='/login' component={Login} exact />
+        <Route path='/loginAdmin' component={LoginAdmin} exact />
         <Route path='/callback' component={LoginCallback} exact />
         <Route path='/callback/cas' component={LoginCallbackCAS} exact />
         <Route path='/callback/oauth' component={LoginCallbackOAuth} exact />
