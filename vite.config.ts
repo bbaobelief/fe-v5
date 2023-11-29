@@ -72,15 +72,15 @@ export default defineConfig({
         changeOrigin: true,
       },
       '/api/n9e': {
-        target: 'http://10.206.0.11:9000/',
+        target: 'http://127.0.0.1:18000/',
         changeOrigin: true,
       },
       '/api/v1/': {
-        target: 'http://10.206.0.11:9000/',
+        target: 'http://127.0.0.1:18000/',
         changeOrigin: true,
       },
       '/api/fc-brain': {
-        target: 'http://10.206.0.11:9000/',
+        target: 'http://127.0.0.1:18000/',
         changeOrigin: true,
       },
     },

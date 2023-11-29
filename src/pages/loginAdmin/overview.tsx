@@ -14,20 +14,8 @@
  * limitations under the License.
  *
  */
-import React from 'react';
-import { message } from 'antd';
-import { getRedirectURLCAS } from '@/services/login';
-import './login.less';
+import React, { useState, useEffect, useRef } from 'react';
 
-export default function Login() {
-  getRedirectURLCAS().then((res) => {
-    if (res.dat) {
-      window.location.href = res.dat.redirect;
-      localStorage.setItem('CAS_state', res.dat.state);
-    } else {
-      message.warning('没有配置 CAS 登录地址！');
-    }
-  });
-
-  return <div></div>;
+export default function Overview() {
+  return <div className='login-warp'></div>;
 }
