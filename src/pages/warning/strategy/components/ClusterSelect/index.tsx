@@ -3,16 +3,9 @@ import { Form, Select } from 'antd';
 import _ from 'lodash';
 import { CaretDownOutlined } from '@ant-design/icons';
 import { getCommonClusters, getCommonESClusters, getCommonSLSClusters } from '@/services/common';
-export const ClusterAll = '$all';
 
 export default function index({ form, cate }) {
   const [clusterList, setClusterList] = useState<string[]>([]);
-  const handleClusterChange = (v: string[]) => {
-    if (v.includes(ClusterAll)) {
-      form.setFieldsValue({ cluster: [ClusterAll] });
-    }
-  };
-
   useEffect(() => {
     if (cate === 'elasticsearch') {
       getCommonESClusters()
@@ -35,7 +28,7 @@ export default function index({ form, cate }) {
     if (cate === 'prometheus') {
       getCommonClusters()
         .then(({ dat }) => {
-          setClusterList(_.concat(['$all'], dat));
+          setClusterList(dat);
         })
         .catch(() => {
           setClusterList([]);
@@ -54,7 +47,7 @@ export default function index({ form, cate }) {
         },
       ]}
     >
-      <Select suffixIcon={<CaretDownOutlined />} mode='multiple' onChange={handleClusterChange}>
+      <Select suffixIcon={<CaretDownOutlined />} mode='multiple'>
         {clusterList?.map((item) => (
           <Select.Option value={item} key={item}>
             {item}

@@ -26,7 +26,6 @@ import { CommonStoreState } from '@/store/commonInterface';
 import { getTeamInfoList, getNotifiesList } from '@/services/manage';
 import { SwitchWithLabel } from './SwitchWithLabel';
 import { debounce, join } from 'lodash';
-import { ClusterAll } from './operateForm';
 const layout = {
   labelCol: {
     span: 2,
@@ -289,12 +288,6 @@ const editModal: React.FC<Props> = ({ isModalVisible, editModalFinish }) => {
     });
   };
 
-  const handleClusterChange = (v: string[]) => {
-    if (v.includes(ClusterAll)) {
-      form.setFieldsValue({ cluster: [ClusterAll] });
-    }
-  };
-
   const editModalClose = () => {
     editModalFinish(false);
   };
@@ -392,10 +385,7 @@ const editModal: React.FC<Props> = ({ isModalVisible, editModalFinish }) => {
                         },
                       ]}
                     >
-                      <Select suffixIcon={<CaretDownOutlined />} mode='multiple' onChange={handleClusterChange}>
-                        <Option value={ClusterAll} key={ClusterAll}>
-                          {ClusterAll}
-                        </Option>
+                      <Select suffixIcon={<CaretDownOutlined />} mode='multiple'>
                         {clusterList?.map((item) => (
                           <Option value={item} key={item}>
                             {item}

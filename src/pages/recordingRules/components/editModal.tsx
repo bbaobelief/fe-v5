@@ -5,7 +5,6 @@ import { QuestionCircleFilled, CaretDownOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { RootState } from '@/store/common';
 import { CommonStoreState } from '@/store/commonInterface';
-import { ClusterAll } from '../../warning/strategy/components/operateForm';
 const { Option } = Select;
 const layout = {
   labelCol: {
@@ -123,12 +122,6 @@ const editModal: React.FC<Props> = ({ isModalVisible, editModalFinish }) => {
     });
   };
 
-  const handleClusterChange = (v: string[]) => {
-    if (v.includes(ClusterAll)) {
-      form.setFieldsValue({ cluster: [ClusterAll] });
-    }
-  };
-
   const editModalClose = () => {
     editModalFinish(false);
   };
@@ -207,10 +200,7 @@ const editModal: React.FC<Props> = ({ isModalVisible, editModalFinish }) => {
                         },
                       ]}
                     >
-                      <Select suffixIcon={<CaretDownOutlined />} mode='multiple' onChange={handleClusterChange}>
-                        <Option value={ClusterAll} key={ClusterAll}>
-                          {ClusterAll}
-                        </Option>
+                      <Select suffixIcon={<CaretDownOutlined />} mode='multiple'>
                         {clusterList?.map((item) => (
                           <Option value={item} key={item}>
                             {item}

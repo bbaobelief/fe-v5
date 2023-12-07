@@ -218,7 +218,7 @@ const OperateForm: React.FC<Props> = ({ detail = {}, type, tagsObj = {} }: any) 
         ...detail,
         btime: detail?.btime ? moment(detail.btime * 1000) : moment(btimeDefault),
         etime: detail?.etime ? moment(detail.etime * 1000) : moment(etimeDefault),
-        cluster: detail.cluster ? detail.cluster.split(' ') : ['$all'], // 生效集群
+        cluster: detail.cluster ? detail.cluster.split(' ') : ['Default1'], // 生效集群
       }}
     >
       <Card>

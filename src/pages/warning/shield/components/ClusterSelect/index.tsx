@@ -2,16 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Form, Select } from 'antd';
 import { CaretDownOutlined } from '@ant-design/icons';
 import { getCommonClusters, getCommonESClusters, getCommonSLSClusters } from '@/services/common';
-export const ClusterAll = '$all';
 
 export default function index({ form, cate }) {
   const [clusterList, setClusterList] = useState([]);
-  const handleClusterChange = (v: string[]) => {
-    if (v.includes(ClusterAll)) {
-      form.setFieldsValue({ cluster: [ClusterAll] });
-    }
-  };
-
   useEffect(() => {
     if (cate === 'elasticsearch') {
       getCommonESClusters()
@@ -53,10 +46,7 @@ export default function index({ form, cate }) {
         },
       ]}
     >
-      <Select suffixIcon={<CaretDownOutlined />} mode='multiple' onChange={handleClusterChange}>
-        <Select.Option value={ClusterAll} key={ClusterAll}>
-          {ClusterAll}
-        </Select.Option>
+      <Select suffixIcon={<CaretDownOutlined />} mode='multiple'>
         {clusterList?.map((item) => (
           <Select.Option value={item} key={item}>
             {item}

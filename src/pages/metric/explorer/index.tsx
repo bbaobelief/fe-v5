@@ -93,6 +93,13 @@ const Panel = ({
     }
   }, [datasourceCate]);
 
+  useEffect(() => {
+    // Set default value for datasourceName when the component mounts
+    form.setFieldsValue({
+      datasourceName: getDefaultDatasourceName(datasourceCate, datasourceList),
+    });
+  }, [datasourceCate, datasourceList, form]);
+
   return (
     <Card bodyStyle={{ padding: 16 }} className='panel'>
       <Form

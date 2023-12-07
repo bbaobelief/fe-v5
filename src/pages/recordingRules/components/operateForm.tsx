@@ -9,7 +9,6 @@ import { CommonStoreState } from '@/store/commonInterface';
 import { prometheusQuery } from '@/services/warning';
 import { addOrEditRecordingRule, editRecordingRule, deleteRecordingRule } from '@/services/recording';
 import PromQLInput from '@/components/PromQLInput';
-import { ClusterAll } from '../../warning/strategy/components/operateForm';
 const { Option } = Select;
 const layout = {
   labelCol: {
@@ -94,7 +93,7 @@ const operateForm: React.FC<Props> = ({ type, detail = {} }) => {
 
   const addSubmit = () => {
     form.validateFields().then(async (values) => {
-      const cluster = values.cluster.includes(ClusterAll) && clusterList.length > 0 ? clusterList[0] : values.cluster[0] || '';
+      const cluster = clusterList.length > 0 ? clusterList[0] : values.cluster[0] || '';
       const res = await prometheusQuery({ query: values.prom_ql }, cluster);
       if (res.error) {
         notification.error({
@@ -135,12 +134,6 @@ const operateForm: React.FC<Props> = ({ type, detail = {} }) => {
         }
       }
     });
-  };
-
-  const handleClusterChange = (v: string[]) => {
-    if (v.includes(ClusterAll)) {
-      form.setFieldsValue({ cluster: [ClusterAll] });
-    }
   };
 
   return (
@@ -199,10 +192,7 @@ const operateForm: React.FC<Props> = ({ type, detail = {} }) => {
                 },
               ]}
             >
-              <Select suffixIcon={<CaretDownOutlined />} mode='multiple' onChange={handleClusterChange}>
-                <Option value={ClusterAll} key={ClusterAll}>
-                  {ClusterAll}
-                </Option>
+              <Select suffixIcon={<CaretDownOutlined />} mode='multiple'>
                 {clusterList?.map((item) => (
                   <Option value={item} key={item}>
                     {item}
@@ -219,7 +209,7 @@ const operateForm: React.FC<Props> = ({ type, detail = {} }) => {
                       <PromQLInput
                         url='/api/n9e/prometheus'
                         headers={{
-                          'X-Cluster': form.getFieldValue('cluster').includes(ClusterAll) && clusterList.length > 0 ? clusterList[0] : form.getFieldValue('cluster')[0] || '',
+                          'X-Cluster': clusterList.length > 0 ? clusterList[0] : form.getFieldValue('cluster')[0] || '',
                           Authorization: `Bearer ${localStorage.getItem('access_token') || ''}`,
                         }}
                         onChange={(val) => {

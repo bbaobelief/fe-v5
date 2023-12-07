@@ -34,9 +34,8 @@ import OldElasticsearchSettings from './ElasticsearchSettings/Old';
 import ElasticsearchSettings from './ElasticsearchSettings';
 import AliyunSLSSettings from './AliyunSLSSettings';
 import CateSelect from './CateSelect';
-import ClusterSelect, { ClusterAll } from './ClusterSelect';
+import ClusterSelect from './ClusterSelect';
 import { parseValues, stringifyValues } from './utils';
-export { ClusterAll } from './ClusterSelect';
 const { Option } = Select;
 
 interface Props {
@@ -151,7 +150,7 @@ const operateForm: React.FC<Props> = ({ type, detail = {} }) => {
             message.warning('请先校验指标');
             return;
           }
-          const cluster = values.cluster.includes(ClusterAll) && clusterList.length > 0 ? clusterList[0] : values.cluster[0] || '';
+          const cluster = clusterList.length > 0 ? clusterList[0] : values.cluster[0] || '';
           const res = await prometheusQuery({ query: values.prom_ql }, cluster);
           if (res.error) {
             notification.error({
@@ -174,6 +173,7 @@ const operateForm: React.FC<Props> = ({ type, detail = {} }) => {
           callbacks,
           cluster: values.cluster.join(' '),
         };
+        console.log(1111, values.cluster)
         let reqBody,
           method = 'Post';
         if (type === 1) {
@@ -224,7 +224,7 @@ const operateForm: React.FC<Props> = ({ type, detail = {} }) => {
           severity: 2,
           disabled: 0, // 0:立即启用 1:禁用  待修改
           ...parseValues(detail),
-          cluster: detail.cluster ? detail.cluster.split(' ') : ['$all'], // 生效集群
+          cluster: detail.cluster ? detail.cluster.split(' ') : localStorage.getItem('curCluster'), // 生效集群
           enable_in_bg: detail?.enable_in_bg === 1,
           effective_time: detail?.enable_etimes
             ? detail?.enable_etimes.map((item, index) => ({
@@ -327,7 +327,7 @@ const operateForm: React.FC<Props> = ({ type, detail = {} }) => {
                               <AdvancedWrap var='VITE_IS_ALERT_AI'>
                                 {(visible) => {
                                   const cluster =
-                                    form.getFieldValue('cluster').includes(ClusterAll) && clusterList.length > 0 ? clusterList[0] : form.getFieldValue('cluster')[0] || '';
+                                    clusterList.length > 0 ? clusterList[0] : form.getFieldValue('cluster')[0] || '';
                                   return (
                                     <Row gutter={8}>
                                       <Col flex='auto'>

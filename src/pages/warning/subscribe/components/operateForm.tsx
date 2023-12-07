@@ -29,7 +29,6 @@ import { CommonStoreState } from '@/store/commonInterface';
 import '../index.less';
 import { useTranslation } from 'react-i18next';
 import _ from 'lodash';
-import { ClusterAll } from '../../strategy/components/operateForm';
 const { Option } = Select;
 const { TextArea } = Input;
 
@@ -155,12 +154,6 @@ const OperateForm: React.FC<Props> = ({ detail = {}, type }) => {
     });
   };
 
-  const handleClusterChange = (v: string[]) => {
-    if (v.includes(ClusterAll)) {
-      form.setFieldsValue({ cluster: [ClusterAll] });
-    }
-  };
-
   return (
     <>
       <div className='operate-form-index' id={littleAffect ? 'littleAffect' : ''}>
@@ -191,10 +184,7 @@ const OperateForm: React.FC<Props> = ({ detail = {}, type }) => {
                 },
               ]}
             >
-              <Select suffixIcon={<CaretDownOutlined />} mode='multiple' onChange={handleClusterChange}>
-                <Option value={ClusterAll} key={ClusterAll}>
-                  {ClusterAll}
-                </Option>
+              <Select suffixIcon={<CaretDownOutlined />} mode='multiple'>
                 {clusterList?.map((item, index) => (
                   <Option value={item} key={index}>
                     {item}
