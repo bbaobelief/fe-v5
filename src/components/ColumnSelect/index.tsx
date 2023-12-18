@@ -28,11 +28,12 @@ interface Props {
   noRightPadding?: boolean;
   onClusterChange?: (v: string[]) => void;
   onBusiGroupChange?: (v: number) => void;
+  onDisabledChange?: (v: number | undefined) => void;
   onSeverityChange?: (v: number | undefined) => void;
   onEventTypeChange?: (v: number | undefined) => void;
 }
 export default function ColumnSelect(props: Props) {
-  const { onSeverityChange, onEventTypeChange, onBusiGroupChange, onClusterChange, noLeftPadding, noRightPadding = true } = props;
+  const { onDisabledChange, onSeverityChange, onEventTypeChange, onBusiGroupChange, onClusterChange, noLeftPadding, noRightPadding = true } = props;
   const { clusters, busiGroups } = useSelector<RootState, CommonStoreState>((state) => state.common);
   const [filteredBusiGroups, setFilteredBusiGroups] = useState(busiGroups);
   const fetchBusiGroup = (e) => {
@@ -91,6 +92,12 @@ export default function ColumnSelect(props: Props) {
           ))}
         </Select>
       )}
+      {onDisabledChange && (
+        <Select suffixIcon={<CaretDownOutlined />} allowClear style={{ minWidth: 80 }} placeholder='状态' onChange={onDisabledChange} getPopupContainer={() => document.body} defaultValue={0}>
+          <Select.Option value={0}>开启</Select.Option>
+          <Select.Option value={1}>关闭</Select.Option>
+        </Select>
+      )}      
       {onSeverityChange && (
         <Select suffixIcon={<CaretDownOutlined />} allowClear style={{ minWidth: 80 }} placeholder='事件级别' onChange={onSeverityChange} getPopupContainer={() => document.body}>
           <Select.Option value={1}>一级告警</Select.Option>

@@ -57,6 +57,7 @@ interface Props {
 }
 
 const PageTable: React.FC<Props> = ({ bgid }) => {
+  const [disabled, setDisabled] = useState<number | undefined>(0);
   const [severity, setSeverity] = useState<number>();
   const [clusters, setClusters] = useState<string[]>([]);
   const { t } = useTranslation();
@@ -79,7 +80,7 @@ const PageTable: React.FC<Props> = ({ bgid }) => {
     if (bgid) {
       getAlertRules();
     }
-  }, [bgid, severity]);
+  }, [bgid, severity, disabled]);
 
   useEffect(() => {
     filterData();
@@ -94,7 +95,7 @@ const PageTable: React.FC<Props> = ({ bgid }) => {
     if (success) {
       setCurrentStrategyDataAll(
         dat.filter((item) => {
-          return !severity || item.severity === severity;
+          return (!severity || item.severity === severity) && (disabled === undefined || item.disabled === disabled);
         }) || [],
       );
       setLoading(false);
@@ -394,7 +395,7 @@ const PageTable: React.FC<Props> = ({ bgid }) => {
               <Select.Option value='aliyun-sls'>阿里云 SLS</Select.Option>
             </Select>
           </AdvancedWrap>
-          <ColumnSelect noLeftPadding noRightPadding onSeverityChange={(e) => setSeverity(e)} onClusterChange={(e) => setClusters(e)} />
+          <ColumnSelect noLeftPadding noRightPadding onDisabledChange={(e) => setDisabled(e)} onSeverityChange={(e) => setSeverity(e)} onClusterChange={(e) => setClusters(e)} />
           <SearchInput className={'searchInput'} placeholder={t('搜索名称或标签')} onSearch={setQuery} allowClear />
         </Space>
         <div className='strategy-table-search-right'>
