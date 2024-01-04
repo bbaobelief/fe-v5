@@ -107,7 +107,7 @@ const editModal: React.FC<Props> = ({ isModalVisible, editModalFinish }) => {
         delete data.enable_status;
       }
       if (values.field === 'cluster') {
-        data.cluster = values.cluster.join(' ');
+        data.cluster = values.cluster;
       }
       Object.keys(data).forEach((key) => {
         // 因为功能上有清除备注的需求，需要支持传空

@@ -115,7 +115,7 @@ const OperateForm: React.FC<Props> = ({ detail = {}, type }) => {
       rule_id: ruleCur.id,
       user_group_ids: values.user_group_ids ? values.user_group_ids.join(' ') : '',
       new_channels: values.new_channels ? values.new_channels.join(' ') : '',
-      cluster: values.cluster.join(' '),
+      cluster: values.cluster,
     };
     if (type === 1) {
       editSubscribe([{ ...params, id: detail.id }], curBusiItem.id)

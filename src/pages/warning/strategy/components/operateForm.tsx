@@ -171,9 +171,8 @@ const operateForm: React.FC<Props> = ({ type, detail = {} }) => {
           notify_recovered: values.notify_recovered ? 1 : 0,
           enable_in_bg: values.enable_in_bg ? 1 : 0,
           callbacks,
-          cluster: values.cluster.join(' '),
+          cluster: values.cluster,
         };
-        console.log(1111, values.cluster)
         let reqBody,
           method = 'Post';
         if (type === 1) {

@@ -104,7 +104,7 @@ const operateForm: React.FC<Props> = ({ type, detail = {} }) => {
 
       const d = {
         ...values,
-        cluster: values.cluster.join(' '),
+        cluster: values.cluster,
       };
       let reqBody,
         method = 'Post';

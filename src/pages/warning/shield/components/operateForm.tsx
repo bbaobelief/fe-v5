@@ -153,7 +153,7 @@ const OperateForm: React.FC<Props> = ({ detail = {}, type, tagsObj = {} }: any) 
     });
     const params = {
       ...values,
-      cluster: values.cluster.join(' '),
+      cluster: values.cluster,
       btime: moment(values.btime).unix(),
       etime: moment(values.etime).unix(),
       tags,

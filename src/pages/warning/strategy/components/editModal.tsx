@@ -266,7 +266,7 @@ const editModal: React.FC<Props> = ({ isModalVisible, editModalFinish }) => {
           }
           break;
         case 'cluster':
-          data.cluster = values.cluster.join(' ');
+          data.cluster = values.cluster;
           break;
         case 'notify_recovered':
           data.notify_recovered = values.notify_recovered ? 1 : 0;
